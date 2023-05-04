@@ -23,7 +23,7 @@ def line(colour, x_cord, y_cord, length, width, border):
     pygame.draw.rect(screen, colour, (x_cord + border, y_cord + border, length - 2*border, width- 2*border))
 
 def dot(x_cord, y_cord):
-    pygame.draw.rect(screen, (0, 0, 0), x_cord, y_cord, line_width, line_width)
+    pygame.draw.circle(screen, black, (x_cord + line_width/2, y_cord + line_width/2), line_width)
     
 
 
@@ -31,13 +31,11 @@ def Grid(gridSizeX, gridSizeY):
     x= 10
     y= 10
     for i in range(0, gridSizeY):
-
-
         for i in range(0, gridSizeX):
     
             line(white, x, y, line_length, line_width, 2)
-            dot(x, y)
             line(white, x, y, line_width, line_length, 2)
+            dot(x, y)
             x += line_length
         x = 10
         y += line_length
@@ -48,6 +46,7 @@ def Grid(gridSizeX, gridSizeY):
     for i in range(0, gridSizeY):
 
         line(white, x + (line_length * (gridSizeX)), y, line_width, line_length, 2)
+        dot(x + (line_length * (gridSizeX)), y)
         
         y += line_length
     x = 10
@@ -55,8 +54,14 @@ def Grid(gridSizeX, gridSizeY):
     for i in range(0, gridSizeX):
      
         line(white, x , y + (line_length * (gridSizeY)), line_length, line_width, 2)
+        dot(x, y + (line_length * (gridSizeY)))
         x += line_length
+    x = 10
+    y = 10
+    dot(x + (line_length * gridSizeX), y + (line_length *gridSizeY))
 Grid(5, 5)
+
+
 
 def main():
      
