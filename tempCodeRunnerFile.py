@@ -16,9 +16,8 @@ fps = 60
 fpsClock = pygame.time.Clock()
 screen = pygame.display.set_mode((screen_x, screen_y),0,32)
 screen.fill(white)
-CURRENT_PLAYER = 1
+
 objects = []
-(mouseX, mouseY) = pygame.mouse.get_pos()
 
 
 Grid(5, 5)
@@ -28,17 +27,14 @@ def main():
     while True:
         
         
-        
+
 
 
         for event in pygame.event.get():
             if event.type==QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == MOUSEBUTTONDOWN:
-                if mouseX and mouseY <= 10:
-                    
-                    CURRENT_PLAYER = 1
+        pygame.display.update()
 
         for object in objects:
             object.process()
