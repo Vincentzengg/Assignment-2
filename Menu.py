@@ -4,15 +4,19 @@ pygame.init()
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+FPS = 30
 
+clock = pygame.time.Clock()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Menu")
+
+#images
+play_img = pygame.image.load('./IMAGES/play.png').convert_alpha()
 
 # define font
 FONT = pygame.font.SysFont('arialblack', 40)
 
 #game variables
-
 game_play = False
 
 # define colors
@@ -30,12 +34,15 @@ class Button():
         #draw button
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
+play_button = Button(100, 100, play_img, 0.5)
 #Button instances
-start_button = Button(100, 200,)
+
+
 
 def draw_text(text, font, color, x, y):
     img = font.render(text, True, color)
-    screen.blit(img, (x, y))
+    img_rect = img.get_rect(center=(x, y))
+    screen.blit(img, (img_rect))
 
 
 
@@ -43,14 +50,17 @@ def draw_text(text, font, color, x, y):
 run = True
 while run:
     screen.fill(background_colour)
-
+    
 
     if game_play == True:
         pass
     else:
-        draw_text("PLAY", FONT, TEXT_COLOR, (SCREEN_WIDTH/2 -80), 200)
-        draw_text("OPTIONS", FONT, TEXT_COLOR, (SCREEN_WIDTH/2 -100), 250)
-        draw_text("QUIT", FONT, TEXT_COLOR, (SCREEN_WIDTH/2 -80), 300)
+        draw_text("PLAY", FONT, TEXT_COLOR, (SCREEN_WIDTH/2), 200)
+        draw_text("OPTIONS", FONT, TEXT_COLOR, (SCREEN_WIDTH/2), 250)
+        draw_text("QUIT", FONT, TEXT_COLOR, (SCREEN_WIDTH/2), 300)
+
+    
+    play_button.draw()
 
     
 
@@ -58,4 +68,5 @@ while run:
         if event.type == pygame.QUIT:
             run = False
     pygame.display.update()
+    clock.tick(FPS)
 
