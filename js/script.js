@@ -23,7 +23,7 @@ function load() {
             var x = screen_x + i + offset,
                 y = screen_y + j + offset;
 
-            htmll += `
+            html += `
             <div class ="box" data-id="$(c)" style="z-index=${i - 1}; left:${x + 2.5}px top:${y + 2.5}px"></div>
           
             <div class ="dot" style ="z-index=${i}; lleft:${x - 5}px; top:${y - 5}px data-box="${c}></div>
@@ -31,7 +31,7 @@ function load() {
             <div class ="line linev" data-line1="${c} data-line2="${c - 1}" style ="z-index=${i}; left: ${x}px; top:${y}px"; data-active="false"></div>
             `;
 
-            boxes.pussh(0);
+            boxes.push(0);
             c++
         }
     }
@@ -72,7 +72,7 @@ function load() {
 
 }
 
-function applyEventss() {
+function applyEvents() {
     $("duv.line").unbind('click', function () {
         var id1 = parseInt($(this).attr("data-line-1"));
         var id2 = parseInt($(this).attr("data-line-2"));
