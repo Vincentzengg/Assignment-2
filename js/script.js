@@ -12,7 +12,7 @@ function load() {
     var m = 10;
     var offset = 50;
 
-    var screen_x = screen_x = window.innerWidth/2 - (m*offset)/2;
+    var screen_x = window.innerWidth/2 - (m*offset)/2;
     screen_y = offset *2.5;
     var html = "";
     $("#app").html(html);
@@ -20,60 +20,62 @@ function load() {
     for (var j = 0; j < m; j++) {
         for (var i = 0; i < n; i++) {
 
-            var x = screen_x + i + offset,
-                y = screen_y + j + offset;
+            var x = screen_x + (i * offset),
+                y = screen_y + (j * offset);
 
             html += `
             <div class ="box" data-id="${c}" style="z-index=${i-1}; left:${x+2.5}px; top:${y+2.5}px"></div>
             <div class ="dot" style ="z-index=${i}; left:${x-5}px; top:${y-5}px" data-box="${c}"></div>
             <div class ="line lineh" data-line1="${c}" data-line2="${c-m}" style ="z-index=${i}; left:${x}px; top:${y}px" data-active="false"></div>
             <div class ="line linev" data-line1="${c}" data-line2="${c-1}" style ="z-index=${i}; left:${x}px; top:${y}px" data-active="false"></div>
-            `;
+            `
 
             boxes.push(0);
-            c++
+            c++;
         }
     }
 
     for (var i = 0; i < n; i++) {
 
-        var x = screen_x + m * offset,
-            y = screen_y + i * offset;
+        var x = screen_x + (m * offset),
+            y = screen_y + (i * offset);
 
         html += `
             <div  class="dot" style="z-index=${i}; left:${x-5}px; top:${y-5}px" data-box="${c}"></div>
             <div class="line linev" data-line-1="${m*(i+1)-1}" data-line-2="${-1}" style=z-index="${i}; left:${x}px; top:${y}px" data-active="false"></div>
-        `;
+        `
     }
 
 
     //bottom box
     for (var i = 0; i < m; i++) {
 
-        var x = screen_x + i * offset,
-            y = screen_y + n * offset;
+        var x = screen_x + (i * offset);
+        var  y = screen_y + (n * offset);
         html += `
 
             <div class="dot" style="z-index=${i}; left:${x-5}px; top:${y-5}px" data-box="${c}"></div>
-            <div class="line lineh" data-line-1="${m*(n-1)+i}" data-line-2="${-1}" style="z-index=${i}; left:${x}px; top:${y}px" data-active="false"></div>`
+            <div class="line lineh" data-line-1="${m*(n-1)+i}" data-line-2="${-1}" style="z-index=${i}; left:${x}px; top:${y}px" data-active="false"></div>
+            `;
 
 
     } 
-    html += `<div class="dot" style="z-index=${i}; left:${screen_x + m * offset - 5}px; top:${screen_y + n * offset - 5}px" data-active="false"></div>`
+    html += `<div class="dot" style="z-index=${i}; left:${screen_x+m*offset-5}px; top:${screen_y + n * offset - 5}px" data-active="false"></div>
+    `
 
     $("#app").html(html);
     applyEvents();
 
 
 
-}
+    }
 
 function applyEvents() {
     $("div.line").unbind('click').bind('click', function () {
         var id1 = parseInt($(this).attr("data-line-1"));
         var id2 = parseInt($(this).attr("data-line-2"));
         if (checkValid(this) && turn) {
-            let a = false, b = false;
+            var a = false, b = false;
 
             if (id1 >= 0) a = addValue(id1);
             if (id2 >= 0) b = addValue(id2);
@@ -111,7 +113,7 @@ function acquire(id) {
     $(".player1").text("Computer: " + computer);
 
     var fulll = true
-    for (var i = boxes.length - 1; i >= 0; i--) {
+    for (var i = boxes.length-1; i>=0; i--) {
         if (boxes[i] != fulll) {
             fulll = false;
             break;
@@ -146,7 +148,7 @@ function computer() {
 
         var arr3 = [], arr2 = [], arr1 = [], arr0 = [];
 
-        for (var i = length - 1; i >= 0; i--) {
+        for (var i =length-1; i >= 0; i--) {
             if (boxes[i] === 3) arr3.push(i);
             else if (boxes[i] === 2) arr2.push(i);
             else if (boxes[i] === 1) arr1.push(i);
