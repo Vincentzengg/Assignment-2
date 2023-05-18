@@ -46,14 +46,14 @@ body{
     height: 15px;
     width: 15px;
     border-radius: 50%;
-    background-color: red;
+    background-color: rgb(0, 0, 0);
     z-index: 1000;
 
 }
 
 .line{
     position: absolute;
-    background-color: rgb(25, 24, 24);
+    background-color: rgb(0, 0, 0);
     cursor: pointer;
     z-index:   1;
 
@@ -65,13 +65,19 @@ body{
     width: 5px;
 }
 
+.lineh{
+
+    height: 5px;
+    width: 50px;
+}
+
 .line:hover{
     background-color: #dd9b0b;
 
 }
 
 .line-active{
-    background-color: #ff0000;
+    background-color: #e91919;
 }
 
 

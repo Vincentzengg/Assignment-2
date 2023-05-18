@@ -26,8 +26,8 @@ function load() {
             html += `
             <div class ="box" data-id="${c}" style="z-index=${i-1}; left:${x+2.5}px; top:${y+2.5}px"></div>
             <div class ="dot" style ="z-index=${i}; left:${x-5}px; top:${y-5}px" data-box="${c}"></div>
-            <div class ="line lineh" data-line1="${c}" data-line2="${c-m}" style ="z-index=${i}; left:${x}px; top:${y}px" data-active="false"></div>
-            <div class ="line linev" data-line1="${c}" data-line2="${c-1}" style ="z-index=${i}; left:${x}px; top:${y}px" data-active="false"></div>
+            <div class ="line lineh" data-line1="${c}" data-line2="${c-m}" style="z-index=${i}; left:${x}px; top:${y}px" data-active="false"></div>
+            <div class ="line linev" data-line1="${c}" data-line2="${c-1}" style="z-index=${i}; left:${x}px; top:${y}px" data-active="false"></div>
             `
 
             boxes.push(0);
@@ -42,14 +42,13 @@ function load() {
 
         html += `
             <div  class="dot" style="z-index=${i}; left:${x-5}px; top:${y-5}px" data-box="${c}"></div>
-            <div class="line linev" data-line-1="${m*(i+1)-1}" data-line-2="${-1}" style=z-index="${i}; left:${x}px; top:${y}px" data-active="false"></div>
+            <div class="line linev" data-line-1="${m*(i+1)-1}" data-line-2="${-1}" style="z-index=${i}; left:${x}px; top:${y}px" data-active="false"></div>
         `
     }
 
 
     //bottom box
     for (var i = 0; i < m; i++) {
-
         var x = screen_x + (i * offset);
         var  y = screen_y + (n * offset);
         html += `
@@ -60,7 +59,7 @@ function load() {
 
 
     } 
-    html += `<div class="dot" style="z-index=${i}; left:${screen_x+m*offset-5}px; top:${screen_y + n * offset - 5}px" data-active="false"></div>
+    html += `<div class="dot" style="z-index=${i}; left:${screen_x+m*offset-5}px; top:${screen_y+n*offset-5}px" data-active="false"></div>
     `
 
     $("#app").html(html);
