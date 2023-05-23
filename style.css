@@ -16,7 +16,7 @@ body{
 
 .player1{
     margin: 0 auto; 
-    color: rgb(29, 147, 162);
+    color: rgb(162, 29, 29);
     font-weight: bolder;
     font-size: 20px;
 
@@ -80,5 +80,14 @@ body{
     background-color: #e91919;
 }
 
-
+.RestartButton {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
   

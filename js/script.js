@@ -1,15 +1,15 @@
 var boxes = [];
 var turn = true;
-var you = 0;
-var computer = 0;
+var player_score = 0;
+var computer_score = 0;
 
 function load() {
     boxes = [];
     turn = true;
-    you = 0;
-    computer = 0;
-    var n = 10;
-    var m = 10;
+    player_score = 0;
+    computer_score = 0;
+    var n = 5;
+    var m = 5;
     var offset = 50;
 
     var screen_x = window.innerWidth/2 - (m*offset)/2;
@@ -108,8 +108,8 @@ function acquire(id) {
     $("div.box[data-id='"+id+"']").css("background-color", color);
     boxes[id] = "full";
 
-    $(".player2").text("You: " + you);
-    $(".player1").text("Computer: " + computer);
+    $(".player2").text("You: " + player_score);
+    $(".player1").text("Computer: " + computer_score);
 
     var fulll = true
     for (var i = boxes.length-1; i>=0; i--) {
@@ -120,7 +120,7 @@ function acquire(id) {
         }
 
     }
-    if (fulll) alert((you > computer) ? "You won!" : "Computer won!");
+    if (fulll) alert((player_score > computer_score) ? "You won!" : "Computer won!");
 
 }
 function addValue(id) {
@@ -186,15 +186,15 @@ function computerSelect(id) {
 
     console.log("box" + id);
 
-    $("div.line[data-line-1='" + id + "'], div.line[data-line-2='" + id + "']").each(function (i, v) {
+        $("div.line[data-line-1='" + id + "'], div.line[data-line-2='" + id + "']").each(function (i, v) {
 
-        if (!$(v).hasClasss("line-active")) {
+        if (!$(v).hasClass("line-active")) {
             var id1 = parseInt($(v).attr("data-line-1"));
             var id2 = parseInt($(v).attr("data-line-2"));
 
             console.log("-----" + turn)
 
-            if (checkValid(v) && turn === false)
+            if (checkValid(v) && turn === false) {
                 console.log("-----");
                 if(id1 >= 0) var a=addValue(id1);
                 if(id2 >= 0) var b=addValue(id2);
@@ -204,7 +204,10 @@ function computerSelect(id) {
             } else
                 turn = true;
             $("#turn").text("Turn :" + "You")
+            }
+        
         }
+        
     });
 }
 
