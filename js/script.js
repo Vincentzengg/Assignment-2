@@ -1,13 +1,13 @@
 var boxes = [];
 var turn = true;
-var you = 0;
-var computer = 0;
+var your_score = 0;
+var computer_score = 0;
 
 function load() {
     boxes = [];
     turn = true;
-    you = 0;
-    computer = 0;
+    your_score = 0;
+    computer_score = 0;
     var n = 10;
     var m = 10;
     var offset = 50;
@@ -99,17 +99,17 @@ function acquire(id) {
     var color;
     if (turn) {
         color = " ";
-        you++;
+        your_score++;
     }
     else {
         color = "skyblue";
-        computer++;
+        computer_score++;
     }
     $("div.box[data-id='" + id + "']").css("background-color", color);
     boxes[id] = "full";
 
-    $(".player2").text("Player: " + you);
-    $(".player1").text("Computer: " + computer);
+    $(".player2").text("Player: " + your_score);
+    $(".player1").text("Computer: " + computer_score);
 
     var fulll = true
     for (var i = boxes.length - 1; i >= 0; i--) {
@@ -120,7 +120,7 @@ function acquire(id) {
         }
 
     }
-    if (fulll) alert((you > computer) ? "You won!" : "Computer won!");
+    if (fulll) alert((your_score > computer_score) ? "You won!" : "Computer won!");
 
 }
 function addValue(id) {
