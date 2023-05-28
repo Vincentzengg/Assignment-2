@@ -16,20 +16,19 @@ body{
 
 .player1{
     margin: 0 auto; 
-    color: rgb(29, 147, 162);
+    color: rgb(29, 146, 162);
     font-weight: bolder;
     font-size: 20px;
 
-
-
-
 }
 
+
+
 .player2{
-
-    margin: 0 auto;
-    color:rgb(12, 12, 134)
-
+    margin: 0 auto; 
+    color: rgb(255, 0, 0);
+    font-weight: bolder;
+    font-size: 20px;
 }
 
 .box{
