@@ -4,12 +4,9 @@ var your_score = 0;
 var computer_score = 0;
 
 function load() {
-    boxes = [];
-    turn = true;
-    your_score = 0;
-    computer_score = 0;
-    var n = 10;
-    var m = 10;
+    
+    var n = 5;
+    var m = 5;
     var offset = 50;
 
     var screen_x = window.innerWidth / 2 - (m * offset) / 2;
@@ -79,7 +76,7 @@ function applyEvents() {
             if (id1 >= 0) a = addValue(id1);
             if (id2 >= 0) b = addValue(id2);
 
-            $(this).addClass("line-active")
+            $(this).addClass("line-player2")
             $(this).attr("data-active", "true");
 
             if (a === false && b === false) {
@@ -98,7 +95,7 @@ function acquire(id) {
 
     var color;
     if (turn) {
-        color = " ";
+        color = "#eb4c34";
         your_score++;
     }
     else {
@@ -154,31 +151,31 @@ function Computer() {
 
         if (arr3.length > 0) {
             computerSelect(arr3[random(0, arr3.length - 1)]);
+            
         }
         else if (arr1.length > 0) {
             computerSelect(arr1[random(0, arr1.length - 1)]);
+            
         }
         else if (arr0.length > 0) {
             computerSelect(arr0[random(0, arr0.length - 1)]);
+            
         }
         else if (arr2.length > 0) {
             computerSelect(arr2[random(0, arr2.length - 1)]);
+            
         }
 
     }, 500);
 }
 
 
-function selectBox() {
 
-
-
-}
 
 function computerSelect(id) {
     console.log("box" + id);
     $("div.line[data-line-1='" + id + "'], div.line[data-line-2='" + id + "']").each(function (i, v) {
-        if (!$(v).hasClass("line-active")) {
+        if (!$(v).hasClass("line-player")) {
             var id1 = parseInt($(v).attr("data-line-1"));
             var id2 = parseInt($(v).attr("data-line-2"));
 
@@ -188,9 +185,14 @@ function computerSelect(id) {
                 if (id2 >= 0) b = addValue(id2);
                 
                 if (a === true || b === true) {
+                    $(this).addClass("line-player1")
                     Computer();
+                    
+                
+
                 } else 
                     turn = true;
+                    $(this).addClass("line-player1")
                     $("#turn").text("Turn: You");
                 
             }

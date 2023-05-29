@@ -75,9 +75,13 @@ body{
 
 }
 
-.line-active{
+.line-player2{
     background-color: #e91919;
 }
 
+.line-player1{
+    background-color: #cb2dd6;
+
+}
 
   
