@@ -108,16 +108,16 @@ function acquire(id) {
     $(".player2").text("Player: " + your_score);
     $(".player1").text("Computer: " + computer_score);
 
-    var fulll = true
+    var full = true
     for (var i = boxes.length - 1; i >= 0; i--) {
-        if (boxes[i] != fulll) {
-            fulll = false;
+        if (boxes[i] != full) {
+            full = false;
             break;
 
         }
 
     }
-    if (fulll) alert((your_score > computer_score) ? "You won!" : "Computer won!");
+    if (full) alert((your_score > computer_score) ? "You won!" : "Computer won!");
 
 }
 function addValue(id) {
