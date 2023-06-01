@@ -3,6 +3,7 @@ var turn = true;
 var your_score = 0;
 var computer_score = 0;
 
+
 function load() {
     
     var n = 5;
@@ -10,7 +11,7 @@ function load() {
     var offset = 50;
 
     var screen_x = window.innerWidth / 2 - (m * offset) / 2;
-    screen_y = offset * 2.5;
+    screen_y = offset * 5;
     var html = "";
     $("#app").html(html);
     var c = 0;
@@ -206,4 +207,6 @@ function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-load();
+load()
+
+

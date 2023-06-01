@@ -2,24 +2,46 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet" > 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LONGEST LINE GAME</title>
     <div></div>
 </head>
+
 <body>
+
+    
+    <div class="bg"></div>
+
+    
+
+    <button id="myButton" class="float-left submit-button" >Main Menu</button>
+
+    <div class ="title"></divclass>
+
+        Longest Line Game
+
+
+    </div>
+
+    
     <div class="player1"></divclass>
         
             Computer : 
     </div>
     <div class="player2"></divclass>
-        
+
         Player : 
 
     </div>
     <div id="app">  </div>
     <script type="text/javascript"src="js/jquery-3.6.4.min.js"></script>
     <script type="text/javascript"src="js/script.js"></script>
+    <script type="text/javascript">
+        document.getElementById("myButton").onclick = function () {
+            location.href = "start_screen.html";
+        };    </script>
 </body>
 </html>
