@@ -84,6 +84,7 @@ function applyEvents() {
                 turn = false;
                 $("#turn").text("Turn: Computer");
                 Computer();
+                
 
             }
 
@@ -116,9 +117,9 @@ function acquire(id) {
 }
 
 function addValue(id) {
-    boxes[id]++;
+    lines[id]++;
 
-    if (boxes[id] === 4) {
+    if (lines[id] === 1) {
         acquire(id);
         return true;
     }
@@ -142,7 +143,7 @@ function Computer() {
         for (var i = 0; i < lines.length; i++) {
             if (lines[i] === "empty") {
                 lines[i] = "computer";
-                var playerScore = getPlayerScore(lines);
+                var playerScore = your_score;
                 if (playerScore === maxLength) {
                     longestLines.push(i);
                 }
