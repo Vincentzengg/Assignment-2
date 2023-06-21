@@ -2,41 +2,36 @@ import { useState } from 'react'
 import './App.css'
 
 
-function GenerateRow(squaresPerRow) {
-  let squareValue = 0
-  const row = [];
-  for (let i = 0; i < squaresPerRow; i++) {
-    row.push(<Square value={squareValue} onSquareClick={() => handleClick(squareValue)} />);
-    squareValue++;
-  }
-
-  return row;
-}
-
-function GenerateBoard(rows, squaresPerRow) {
-
-  const board = [];
-  for (let i = 0; i < rows; i++) {
-    board.push(GenerateRow(squaresPerRow));
-  }
-
-  return board;
-}
 
 
-function Square({value, onSquareClick}) {
-  return (
-    <button className="square" onClick={onSquareClick}>
-      {value}
-    </button>
-  );
-}
+
 
 export default function Board() {
+
+  function GenerateRow(startingValue, squaresPerRow) {
+    let row = []
+    let squareValue = startingValue
+    for (let j = 0; j < squaresPerRow; j++) {
+      
+        {row.push(
+        
+        <button className="square" onClick={()=> handleClick(squareValue)}>{squareValue}</button>
+      
+        )}
+      {squareValue++}
+      
+      }
+  
+    return row
+  
+  
+  }
+
   const [xIsNext, setXIsNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [squares, setSquares] = useState(Array(64).fill(null));
 
   function handleClick(i) {
+    console.log("clicked" + i)
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -63,6 +58,22 @@ export default function Board() {
       <div className="status">{status}</div>
       
       
+      <div className='board-row'>
+        {GenerateRow(0, 8)}
+      </div>
+      {GenerateRow(8, 8)}
+      <br></br>
+      {GenerateRow(16, 8)}
+      <br></br>
+      {GenerateRow(24, 8)}
+      <br></br>
+      {GenerateRow(32, 8)}
+      <br></br>
+      {GenerateRow(40, 8)}
+      <br></br>
+      {GenerateRow(48, 8)}
+      <br></br>
+      {GenerateRow(56, 8)}
     </>
   );
 }
