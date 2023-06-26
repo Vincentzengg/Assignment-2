@@ -11,17 +11,18 @@ export default function Board() {
   function GenerateRow(startingValue, squaresPerRow) {
     let row = []
     let squareValue = startingValue
+    
     for (let j = 0; j < squaresPerRow; j++) {
-      
-        {row.push(
-        
-        <button className="square" onClick={()=> handleClick(squareValue)}>{squareValue}</button>
-      
-        )}
-      {squareValue++}
+      const currentValue = squareValue
+      {row.push(
+        <button className="square" onClick={() => handleClick(currentValue)}>
+          {squares[currentValue]}
+        </button>
+      )}
+        {squareValue++}
       
       }
-  
+    
     return row
   
   
@@ -31,6 +32,7 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(64).fill(null));
 
   function handleClick(i) {
+    
     console.log("clicked" + i)
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -61,19 +63,27 @@ export default function Board() {
       <div className='board-row'>
         {GenerateRow(0, 8)}
       </div>
-      {GenerateRow(8, 8)}
-      <br></br>
-      {GenerateRow(16, 8)}
-      <br></br>
-      {GenerateRow(24, 8)}
-      <br></br>
-      {GenerateRow(32, 8)}
-      <br></br>
-      {GenerateRow(40, 8)}
-      <br></br>
-      {GenerateRow(48, 8)}
-      <br></br>
-      {GenerateRow(56, 8)}
+      <div className='board-row'>
+        {GenerateRow(8, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(16, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(24, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(32, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(40, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(48, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(56, 8)}
+      </div>
     </>
   );
 }
@@ -90,7 +100,7 @@ function calculateWinner(squares) {
     [2, 4, 6],
   ];
   for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
+    const [a, b, c, d, e] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
