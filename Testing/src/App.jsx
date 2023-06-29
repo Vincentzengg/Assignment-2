@@ -51,6 +51,7 @@ export default function Board() {
   let status;
   if (winner) {
     status = 'Winner: ' + winner;
+    alert("What a fantastic game, the winner is " + winner + "!")
   } else {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O');
   }
@@ -67,6 +68,15 @@ export default function Board() {
         {status}
       </div>
       
+      <div className="restart-button"> 
+        <div class="p-6 max-w-sm mx-auto bg-slate-600 rounded-xl shadow-lg flex items-center space-x-4"> 
+          <div class="text-xl font-medium text-white ">RESTART</div>
+        
+        
+        </div>
+      
+      </div>
+
       
       <div className='board-row'>
         {GenerateRow(0, 8)}
