@@ -1,4 +1,4 @@
-var boxes = [];
+var lines = [];
 var turn = true;
 var your_score = 0;
 var computer_score = 0;
@@ -28,7 +28,7 @@ function load() {
             <div class ="line linev" data-line-1="${c}" data-line-2="${c - 1}" style="z-index=${i}; left:${x}px; top:${y}px" data-active="false"></div>
             `
 
-            boxes.push(0);
+            lines.push("empty");
             c++;
         }
     }
@@ -84,6 +84,7 @@ function applyEvents() {
                 turn = false;
                 $("#turn").text("Turn: Computer");
                 Computer();
+                
 
             }
 
@@ -93,38 +94,32 @@ function applyEvents() {
 }
 
 function acquire(id) {
+    lines[id] = (turn ? "player" : "computer");
 
-    var color;
-    if (turn) {
-        color = "#eb4c34";
-        your_score++;
+    var completedLines = 0;
+    for (var i = 0; i < lines.length; i++) {
+        if (lines[i] === "empty") {
+            continue;
+        }
+        if (lines[i] === lines[i + 1] && lines[i] === lines[i + m] && lines[i] === lines[i + m + 1]) {
+            completedLines++;
+            if (lines[i] === "player") {
+                your_score++;
+            } else {
+                computer_score++;
+            }
+        }
     }
-    else {
-        color = "skyblue";
-        computer_score++;
-    }
-    $("div.box[data-id='" + id + "']").css("background-color", color);
-    boxes[id] = "full";
 
     $(".player2").text("Player: " + your_score);
     $(".player1").text("Computer: " + computer_score);
-
-    var full = true
-    for (var i = boxes.length - 1; i >= 0; i--) {
-        if (boxes[i] != full) {
-            full = false;
-            break;
-
-        }
-
-    }
-    if (full) alert((your_score > computer_score) ? "You won!" : "Computer won!");
-
+    $(".player3").text("Longest Line: " + Math.max(your_score, computer_score));
 }
-function addValue(id) {
-    boxes[id]++;
 
-    if (boxes[id] === 4) {
+function addValue(id) {
+    lines[id]++;
+
+    if (lines[id] === 1) {
         acquire(id);
         return true;
     }
@@ -140,35 +135,30 @@ function Computer() {
     $("#turn").text("Turn: Computer");
 
     setTimeout(function () {
-        var length = boxes.length;
-        var arr3 = [], arr2 = [], arr1 = [], arr0 = [];
+        // ...
 
-        for (var i = length - 1; i >= 0; i--) {
-            if (boxes[i] === 3) arr3.push(i);
-            else if (boxes[i] === 2) arr2.push(i);
-            else if (boxes[i] === 1) arr1.push(i);
-            else arr0.push(i);
-        }
-
-        if (arr3.length > 0) {
-            computerSelect(arr3[random(0, arr3.length - 1)]);
-            
-        }
-        else if (arr1.length > 0) {
-            computerSelect(arr1[random(0, arr1.length - 1)]);
-            
-        }
-        else if (arr0.length > 0) {
-            computerSelect(arr0[random(0, arr0.length - 1)]);
-            
-        }
-        else if (arr2.length > 0) {
-            computerSelect(arr2[random(0, arr2.length - 1)]);
-            
+        // Find player's longest lines
+        var longestLines = [];
+        var maxLength = Math.max(your_score, computer_score);
+        for (var i = 0; i < lines.length; i++) {
+            if (lines[i] === "empty") {
+                lines[i] = "computer";
+                var playerScore = your_score;
+                if (playerScore === maxLength) {
+                    longestLines.push(i);
+                }
+                lines[i] = "empty";
+            }
         }
 
+        // Block the player's longest lines
+        if (longestLines.length > 0) {
+            computerSelect(longestLines[random(0, longestLines.length - 1)]);
+        }
+        // ...
     }, 500);
 }
+
 
 
 
