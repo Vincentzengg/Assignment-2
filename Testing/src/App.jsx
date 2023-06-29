@@ -15,7 +15,7 @@ export default function Board() {
     for (let j = 0; j < squaresPerRow; j++) {
       const currentValue = squareValue
       {row.push(
-        <button className="square" onClick={() => handleClick(currentValue)}>
+        <button className="square bg-slate-100" onClick={() => handleClick(currentValue)}>
           {squares[currentValue]}
         </button>
       )}
@@ -57,7 +57,15 @@ export default function Board() {
 
   return (
     <>
-      <div className="status">{status}</div>
+
+      <h1 className="text-5xl font-bold underline text-slate-500">
+        Longest Line Game
+      </h1>
+
+    
+      <div className="text-red-400 text-lg font-bold">
+        {status}
+      </div>
       
       
       <div className='board-row'>
