@@ -1,6 +1,13 @@
 import { useState } from 'react'
 import './App.css'
+import sound from "./assets/block_click.mp3"
 
+
+
+function block_click() {
+  let audio = new Audio(sound)
+  audio.play()
+}
 
 
 
@@ -11,12 +18,31 @@ export default function Board() {
   function GenerateRow(startingValue, squaresPerRow) {
     let row = []
     let squareValue = startingValue
+
+    
     
     for (let j = 0; j < squaresPerRow; j++) {
       const currentValue = squareValue
+
+      let squareColour;
+      if (squares[currentValue] === 'playerOne') {
+        squareColour = 'bg-red-400'
+        
+      } else if (squares[currentValue] === 'playerTwo') {
+        squareColour = 'bg-blue-400'
+      } else {
+        squareColour = 'bg-slate-400'
+      }  
+
+
       {row.push(
-        <button className="square bg-slate-100" onClick={() => handleClick(currentValue)}>
-          {squares[currentValue]}
+        <button 
+        className={`square ${squareColour}`}
+        onClick={() => handleClick(currentValue)}
+        onClickCapture={block_click}
+        >
+          
+          
         </button>
       )}
         {squareValue++}
@@ -39,9 +65,12 @@ export default function Board() {
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = 'X';
+      nextSquares[i] = 'playerOne';
+      
+      
     } else {
-      nextSquares[i] = 'O';
+      nextSquares[i] = 'playerTwo';
+      
     }
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
@@ -52,8 +81,13 @@ export default function Board() {
   if (winner) {
     status = 'Winner: ' + winner;
     alert("What a fantastic game, the winner is " + winner + "!")
+    block_click()
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = (xIsNext ? 'Player One' : 'Player Two') + "'s turn";
+    if (squares.includes(null) === false) {
+      block_click()
+      alert("it's a draw!")
+    }
   }
 
   return (
@@ -66,15 +100,6 @@ export default function Board() {
     
       <div className="text-red-400 text-lg font-bold">
         {status}
-      </div>
-      
-      <div className="restart-button"> 
-        <div class="p-6 max-w-sm mx-auto bg-slate-600 rounded-xl shadow-lg flex items-center space-x-4"> 
-          <div class="text-xl font-medium text-white ">RESTART</div>
-        
-        
-        </div>
-      
       </div>
 
       
@@ -107,21 +132,39 @@ export default function Board() {
 }
 
 function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c, d, e] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+  
+    // check rows
+    for (let i = 0; i < 64; i += 8) {
+      for (let j = i; j < i + 4; j++) {
+        if (squares[j] && squares[j] === squares[j + 1] && squares[j] === squares[j + 2] && squares[j] === squares[j + 3] && squares[j] === squares[j + 4]) {
+          return squares[j];
+        }
+      }
     }
+    
+    // check columns
+    for (let i = 0; i < 8; i++) {
+      for (let j = i; j < i + 32; j += 8) {
+        if (squares[j] && squares[j] === squares[j + 8] && squares[j] === squares[j + 16] && squares[j] === squares[j + 24] && squares[j] === squares[j + 32]) {
+          return squares[j];
+        }
+      }
+    }
+    
+    // check diagonals
+    for (let i = 0; i < 4; i++) {
+      for (let j = i; j < i + 32; j += 8) {
+        if (squares[j] && squares[j] === squares[j + 9] && squares[j] === squares[j + 18] && squares[j] === squares[j + 27] && squares[j] === squares[j +36]) {
+          return squares[j];
+        }
+      }
+      for (let j = i + 4; j < i +36; j +=8) {
+        if (squares[j] && squares[j] === squares[j +7] && squares[j] === squares [j+14] && squares [j]==squares [j+21]&&squares [j]==squares [j+28]){
+          return squares [j];
+        }
+      }
+      
+    
   }
   return null;
-}
+  }
