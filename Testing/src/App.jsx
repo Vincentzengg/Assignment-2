@@ -123,19 +123,283 @@ export default function Board() {
   }
 
   function makeComputerMove() {
+    // Check for potential winning moves for the computer
+    const computerWinningMove = findWinningMove(squares, 'playerTwo');
+    if (computerWinningMove !== null) {
+      handleClick(computerWinningMove);
+      return;
+    }
+  
+    // Check for potential winning moves for the human player
+    const humanWinningMove = findWinningMove(squares, 'playerOne');
+    if (humanWinningMove !== null) {
+      handleClick(humanWinningMove);
+      return;
+    }
+  
+    // Make a random move
     const availableSquares = squares
       .map((value, index) => (value ? null : index))
       .filter((value) => value !== null);
-
+  
     if (availableSquares.length === 0) {
       return;
     }
-
+  
     const randomIndex = Math.floor(Math.random() * availableSquares.length);
     const selectedSquare = availableSquares[randomIndex];
-
+  
     handleClick(selectedSquare);
   }
+  
+  function makeComputerMove() {
+    // Find the best move for the computer
+    const computerMove = findBestMove(squares);
+    if (computerMove !== null) {
+      handleClick(computerMove);
+      return;
+    }
+  
+    // Make a random move
+    const availableSquares = squares
+      .map((value, index) => (value ? null : index))
+      .filter((value) => value !== null);
+  
+    if (availableSquares.length === 0) {
+      return;
+    }
+  
+    const randomIndex = Math.floor(Math.random() * availableSquares.length);
+    const selectedSquare = availableSquares[randomIndex];
+  
+    handleClick(selectedSquare);
+  }
+  
+  function findBestMove(squares) {
+    // Check for potential winning moves for the computer
+    const computerWinningMove = findWinningMove(squares, 'playerTwo');
+    if (computerWinningMove !== null) {
+      return computerWinningMove;
+    }
+  
+    // Check for potential winning moves for the human player
+    const humanWinningMove = findWinningMove(squares, 'playerOne');
+    if (humanWinningMove !== null) {
+      return humanWinningMove;
+    }
+  
+    // Check for potential three-in-a-row moves for the human player
+    const humanThreeInARowMove = findThreeInARowMove(squares, 'playerOne');
+    if (humanThreeInARowMove !== null) {
+      return humanThreeInARowMove;
+    }
+  
+    // Try to make a move that brings the computer closer to getting five in a row
+    const computerFourInARowMove = findFourInARowMove(squares, 'playerTwo');
+    if (computerFourInARowMove !== null) {
+      return computerFourInARowMove;
+    }
+  
+    return null;
+  }
+  
+  function findWinningMove(squares, player) {
+    for (let i = 0; i < squares.length; i++) {
+      if (squares[i]) {
+        continue;
+      }
+  
+      const nextSquares = squares.slice();
+      nextSquares[i] = player;
+  
+      if (calculateWinner(nextSquares) === player) {
+        return i;
+      }
+    }
+  
+    return null;
+  }
+  
+  function findThreeInARowMove(squares, player) {
+     // Horizontal
+     for (let i = 0; i < squares.length; i += 8) {
+       for (let j = i; j < i +6; j++) {
+         if (
+           squares[j] === player &&
+           squares[j] === squares[j +1] &&
+           squares[j] === squares[j +2] &&
+           !squares[j +3]
+         ) {
+           return j +3;
+         }
+         if (
+           !squares[j] &&
+           squares[j +1] === player &&
+           squares[j +1] === squares[j +2] &&
+           squares[j +1] === squares[j +3]
+         ) {
+           return j;
+         }
+       }
+     }
+   
+     // Vertical
+     for (let i =0; i <squares.length -(8 *3); i++) {
+       if (
+         squares[i] === player &&
+         squares[i] === squares[i +8] &&
+         squares[i] === squares[i +(8 *2)] &&
+         !squares[i +(8 *3)]
+       ) {
+         return i +(8 *3);
+       }
+       if (
+         !squares[i] &&
+         squares[i +8] === player &&
+         squares[i +8] === squares[i +(8 *2)] &&
+         squares[i +8] === squares[i +(8 *3)]
+       ) {
+         return i;
+       }
+       
+     }
+   
+     // Diagonal
+     for(let i=0;i<squares.length-(8*3);i++){
+       if(
+         squares[i]===player&&
+         squares[i]===squares[i+9]&&
+         squares[i]===squares[i+(9*2)]&&
+         !squares[i+(9*3)]
+       ){
+         return i+(9*3)
+       }
+       if(
+         !squares[i]&&
+         squares[i+9]===player&&
+         squares[i+9]===squares[i+(9*2)]&&
+         squares[i+9]===squares[i+(9*3)]
+       ){
+         return i;
+       }
+     }
+     for(let i=4;i<squares.length-(8*2);i++){
+       if(
+         squares[i]==player&&
+         squares[i]==squares[i+7]&&
+         squares[i]==squares[i+(7*2)]&&
+         !squares[i+(7*3)]
+       ){
+         return i+(7*3)
+       }
+       if(
+         !squares[i]&&
+         squares[i+7]==player&&
+         squares[i+7]==squares[i+(7*2)]&&
+         squares[i+7]==squares[i+(7*3)]
+       ){
+         return i;
+       }
+     }
+   
+     return null;
+  }
+  
+  function findFourInARowMove(squares, player) {
+    // Horizontal
+    for (let i = 0; i < squares.length; i += 8) {
+      for (let j = i; j < i +5; j++) {
+        if (
+          squares[j] === player &&
+          squares[j] === squares[j +1] &&
+          squares[j] === squares[j +2] &&
+          squares[j] === squares[j +3] &&
+          !squares[j +4]
+        ) {
+          return j +4;
+        }
+        if (
+          !squares[j] &&
+          squares[j +1] === player &&
+          squares[j +1] === squares[j +2] &&
+          squares[j +1] === squares[j +3] &&
+          squares[j +1] === squares[j +4]
+        ) {
+          return j;
+        }
+      }
+    }
+  
+    // Vertical
+    for (let i =0; i <squares.length -(8 *4); i++) {
+      if (
+        squares[i] === player &&
+        squares[i] === squares[i +8] &&
+        squares[i] === squares[i +(8 *2)] &&
+        squares[i] === squares[i +(8 *3)] &&
+        !squares[i +(8 *4)]
+      ) {
+        return i +(8 *4);
+      }
+      if (
+        !squares[i] &&
+        squares[i +8] === player &&
+        squares[i +8] === squares[i +(8 *2)] &&
+        squares[i +8] === squares[i +(8 *3)] &&
+        squares[i +8] === squares[i +(8 *4)]
+      ) {
+        return i;
+      }
+      
+    }
+  
+    // Diagonal
+    for(let i=0;i<squares.length-(8*4);i++){
+      if(
+        squares[i]===player&&
+        squares[i]===squares[i+9]&&
+        squares[i]===squares[i+(9*2)]&&
+        squares[i]===squares[i+(9*3)]&&
+        !squares[i+(9*4)]
+      ){
+        return i+(9*4)
+      }
+      if(
+        !squares[i]&&
+        squares[i+9]===player&&
+        squares[i+9]===squares[i+(9*2)]&&
+        squares[i+9]===squares[i+(9*3)]&&
+        squares[i+9]===squares[i+(9*4)]
+      ){
+        return i;
+      }
+    }
+    for(let i=4;i<squares.length-(8*3);i++){
+      if(
+        (squares[(i)])==(player)&&
+         (squares[(i)])==((squares[(i)+7]))&&
+         (squares[(i)])==((squares[(i)+(7*2)]))&&
+         !(squares[(i)+(7*3)])
+      ){
+        
+         return (i)+(7*3)
+       }
+       if(
+         !(squares[(i)])&&
+         ((squares[(i)+7])==(player))&&
+         ((squares[(i)+7])==((squares[(i)+(7*2)])))&&
+         ((squares[(i)+7])==((squares[(i)+(7*3)])))&&
+         ((squares[(i)+7])==((squares[(i)+(7*4)])))
+       ){
+         
+          return (i);
+       }
+     }
+  
+    return null;
+  }
+  
+  
 
   const winner = calculateWinner(squares);
   let status;
