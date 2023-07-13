@@ -220,7 +220,7 @@ export default function Board() {
     return null;
   }
   
-  function findThreeInARowMove(squares, player) {
+  function findThreeInARowMove(squares, player) { //Basically the point of this function is that if the player has 4 in a row, they are basically gauranteed a win since the bot would block a side of it but the player can just click on the other, so this is to basically prevent the player from creating a 4 in a row
      // Horizontal
      for (let i = 0; i < squares.length; i += 8) {
        for (let j = i; j < i +6; j++) {
@@ -305,7 +305,7 @@ export default function Board() {
      return null;
   }
   
-  function findFourInARowMove(squares, player) {
+  function findFourInARowMove(squares, player) { //This is to basically make the bot try to get 4 in a row, because if the bot sees 4 in a row, it will make 5 in a row so there isn't a point of making a function to make 5 in a row.
     // Horizontal
     for (let i = 0; i < squares.length; i += 8) {
       for (let j = i; j < i +5; j++) {
