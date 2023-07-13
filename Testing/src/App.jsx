@@ -65,10 +65,10 @@ export default function Board() {
   function GenerateRow(startingValue, squaresPerRow) {
     let row = [];
     let squareValue = startingValue;
-
+  
     for (let j = 0; j < squaresPerRow; j++) {
       const currentValue = squareValue;
-
+  
       let squareColour;
       if (squares[currentValue] === 'playerOne') {
         squareColour = 'bg-red-400';
@@ -77,9 +77,10 @@ export default function Board() {
       } else {
         squareColour = 'bg-slate-400';
       }
-
+  
       row.push(
         <button
+          key={currentValue} 
           className={`square ${squareColour}`}
           onClick={() => {
             handleClick(currentValue);
@@ -89,10 +90,10 @@ export default function Board() {
       );
       squareValue++;
     }
-
+  
     return row;
   }
-
+  
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(64).fill(null));
 
