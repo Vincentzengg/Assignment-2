@@ -411,6 +411,7 @@ export default function Board() {
     status = (xIsNext ? 'Player One' : 'Player Two') + "'s turn";
     if (squares.includes(null) === false) {
       playSound(soundDraw);
+      
       status = "It's a draw!";
     }
   }
