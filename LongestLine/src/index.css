@@ -49,8 +49,8 @@ button {
 
 .square {
   display: inline-block;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   font-size: 24px;
   text-align: center;
   vertical-align: top;
