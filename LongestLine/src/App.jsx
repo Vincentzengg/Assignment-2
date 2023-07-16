@@ -5,6 +5,8 @@ import Home from './pages/Home.jsx'
 import Header from './components/Header'
 import About from './pages/About'
 import Settings from './pages/Settings'
+import PlayerVsPlayer from './pages/PlayerVsPlayer'
+
 
 function App() {
   
@@ -18,7 +20,7 @@ function App() {
             <Route path ="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/settings" element={<Settings />} />
-            
+            <Route path="/PlayerVsPlayer" element={<PlayerVsPlayer />} />
           </Routes>
       </Router>
     </div>

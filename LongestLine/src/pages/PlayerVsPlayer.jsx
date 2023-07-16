@@ -22,7 +22,7 @@ function playSound(audioName) { //This is to play the sound whenever called
 
 
 
-export default function Board() {
+export default function PlayerVsPlayer() {
 
   function HandleRestart() { //This is the function to restart the game, and it is called when the restart button is clicked
     setSquares(Array(64).fill(null)); //This resets the board by making every square empty
