@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import soundClick from "./assets/block_click.mp3"
-import soundWinner from "./assets/winner.mp3"
+import soundWinner from "./assets/Winner.mp3"
 import soundDraw from "./assets/draw.mp3"
 import soundMusic from "./assets/background_music.mp3"
 
