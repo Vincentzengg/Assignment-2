@@ -29,8 +29,8 @@ export default function PlayerVsPlayer() {
     setXIsNext(true); //Makes it so that playerOne goes first
 
   }
+ const [MusicAudio, setMusic] = useState(new Audio(soundMusic));
   const [isPlaying, setIsPlaying] = useState(false);
-  const MusicAudio = new Audio(soundMusic);
 
   const handlePlaying = () => {
     if (isPlaying) {
@@ -39,7 +39,7 @@ export default function PlayerVsPlayer() {
       MusicAudio.play();
     }
     setIsPlaying(!isPlaying);
-  };
+  }; 
 
 
 

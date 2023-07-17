@@ -50,17 +50,17 @@ export default function HardBot() {
     setXIsNext(true);
   }
 
+  const [MusicAudio, setMusic] = useState(new Audio(soundMusic));
   const [isPlaying, setIsPlaying] = useState(false);
-  const MusicAudio = new Audio(soundMusic);
 
   const handlePlaying = () => {
     if (isPlaying) {
       MusicAudio.pause();
-    } else if (!isPlaying) {
+    } else if (!isPlaying){
       MusicAudio.play();
     }
     setIsPlaying(!isPlaying);
-  };
+  }; 
 
   function GenerateRow(startingValue, squaresPerRow) {
     let row = [];
