@@ -29,16 +29,16 @@ export default function PlayerVsPlayer() {
     setXIsNext(true); //Makes it so that playerOne goes first
 
   }
- const [MusicAudio, setMusic] = useState(new Audio(soundMusic));
+ const [MusicAudio, setMusic] = useState(new Audio(soundMusic)); //This is the audio for the game's music
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlaying = () => {
-    if (isPlaying) {
+    if (isPlaying) { //Basically if isPlaying is FALSE, it pauses the audio and if it is TRUE, it plays the audio
       MusicAudio.pause();
     } else if (!isPlaying){
       MusicAudio.play();
     }
-    setIsPlaying(!isPlaying);
+    setIsPlaying(!isPlaying); // At the end of all of it, it sets isPlaying to the opposite of what it was before, so that it can be toggled (when the button presses it)
   }; 
 
 
@@ -60,14 +60,14 @@ export default function PlayerVsPlayer() {
       } else if (squares[currentValue] === 'playerTwo') { //If the square's value becomes playerTwo, it turns it blue
         squareColour = 'bg-blue-400'
       } else {
-        squareColour = 'bg-slate-400' // If the square's value is null (not playerOne or playerTwo), it turns it grey
+        squareColour = 'bg-gray-100 opacity-60' // If the square's value is null (not playerOne or playerTwo), it turns it grey
       }  
 
 
       {row.push(
         <button 
         className={`square ${squareColour}`}
-        onClick={() => {handleClick(currentValue); playSound(soundClick)}}
+        onClick={() => {handleClick(currentValue); playSound(soundClick)}} //It calls to handleclick to tell it what square was clicked on, as well as playing the soundEffect
         
         
         > 
@@ -103,23 +103,32 @@ export default function PlayerVsPlayer() {
       
     }
     setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    setXIsNext(!xIsNext); //Afterwards it will change the turn to the opposite of what it was before, (PlayerOne to PlayerTwo, PlayerTwo to PlayerOne)
   }
 
-  const winner = calculateWinner(squares);  // This is to check if there is a winner, and if there is, it will display the winner
-  let status;
-  if (winner) {
-    status = 'Winner: ' + winner; 
-    playSound(soundWinner)
-  
+const winner = calculateWinner(squares); 
+let status;
+if (winner) {
+  status = 'Winner: ' + winner; //If there is a winner it will play a sound, and it will display the winner, then reset the board same with the draw
+  playSound(soundWinner);
 
-  } else {
-    status = (xIsNext ? 'Player One' : 'Player Two') + "'s turn"; //If there isn't a winner, it will display who's turn it is
-    if (squares.includes(null) === false) {
-      playSound(soundDraw) //If there is no more nulls (empty squares) in the board, it will display that it is a draw 
-      status = "It's a draw!"
-    }
+  setTimeout(() => {
+    setSquares(Array(64).fill(null));
+    setXIsNext(true);
+  }, 3000);
+} else {
+  status = (xIsNext ? 'Player One' : 'Player Two') + "'s turn";
+  if (squares.includes(null) === false) {
+    playSound(soundDraw);
+    status = "It's a draw!";
+
+    setTimeout(() => {
+      setSquares(Array(64).fill(null));
+      setXIsNext(true);
+    }, 3000);
   }
+}
+
 
   return ( //All of this here, is to essentially put everything onto the screen, like the board, title, etc.
     <>
@@ -133,15 +142,14 @@ export default function PlayerVsPlayer() {
         <div class='light x7'></div>
         <div class='light x8'></div>
         <div class='light x9'></div>
-
-      <h1 className="text-5xl font-bold underline text-slate-500">
-        Longest Line Game
-      </h1>
+      <h1 className={`text-5xl font-bold underline ${winner ? `text-yellow-500` : `text-slate-500`}`}> Longest Line Game</h1>
 
     
-      <div className=" text-lg font-bold">
-        {status}
+      <div className={`text-3xl font-bold ${winner ? 'text-yellow-500' : xIsNext ? 'text-red-500' : 'text-blue-500'}`}>
+      {status}
       </div>
+
+
 
       
       <div className='board-row'> 
@@ -168,9 +176,16 @@ export default function PlayerVsPlayer() {
       <div className='board-row'>
         {GenerateRow(56, 8)}
       </div>
-      <button className="text-white-400 text-lg font-bold" onClick={HandleRestart}> Restart</button>
+      <button className="flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
+        w-40 h-12 text-2xl rounded-lg opacity-50 top-40 bottom-0 left-0 right-0 mx-auto 
+        transition duration-300 hover:border-gray-700 hover:bg-gray-200 
+        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={HandleRestart}> Restart</button>
+
       <br></br>
-      <button onClick={handlePlaying}>
+      <button className="flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
+        w-30 h-12 text-xl rounded-lg opacity-50 top-40 bottom-0 left-0 right-0 mx-auto 
+        transition duration-300 hover:border-gray-700 hover:bg-gray-200 
+        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={handlePlaying}>
         {isPlaying ? musicIcon : musicIconMuted}
       </button>
       
@@ -180,13 +195,17 @@ export default function PlayerVsPlayer() {
   );
 }
 
-function calculateWinner(squares) {//This is the wind condition, it checks each row/square, and it finds if there is a square with the same value (playerOne or playerTwo) 5 times in a row, horizontally, verttically, etc.
+function calculateWinner(squares) {//This is the win condition, it checks each row/square, and it finds if there is a square with the same value (playerOne or playerTwo) 5 times in a row, horizontally, verttically, etc.
   
     //Checks for rows 
     for (let i = 0; i < 64; i += 8) {
       for (let j = i; j < i + 4; j++) {
-        if (squares[j] && squares[j] === squares[j + 1] && squares[j] === squares[j + 2] && squares[j] === squares[j + 3] && squares[j] === squares[j + 4]) {
-          return squares[j];
+        if (squares[j] && 
+          squares[j] === squares[j + 1] && 
+          squares[j] === squares[j + 2] && 
+          squares[j] === squares[j + 3] && 
+          squares[j] === squares[j + 4]) {
+          return squares[j]; //Basically what it does is that first it checks the square that was clicked on, then it checks the square to the right of it, and so on, and if it finds a square that is the same value as the square that was clicked on, it will return the value of the square that was clicked on, and that is how it determines the winner
         }
       }
     }
@@ -194,7 +213,11 @@ function calculateWinner(squares) {//This is the wind condition, it checks each 
     // check columns
     for (let i = 0; i < 8; i++) { // Since it is in increments of 8, it will check the square below it because it is 8 squares away
       for (let j = i; j < i + 32; j += 8) {
-        if (squares[j] && squares[j] === squares[j + 8] && squares[j] === squares[j + 16] && squares[j] === squares[j + 24] && squares[j] === squares[j + 32]) {
+        if (squares[j] && 
+          squares[j] === squares[j + 8] && 
+          squares[j] === squares[j + 16] && 
+          squares[j] === squares[j + 24] && 
+          squares[j] === squares[j + 32]) {
           return squares[j];
         }
       }
@@ -203,12 +226,20 @@ function calculateWinner(squares) {//This is the wind condition, it checks each 
     // check diagonals
     for (let i = 0; i < 4; i++) { // The reason why each thing is in increments of 9, is because since the board is set in a 8x8 grid, the next square that is diagonal from the previous square is 9 squares away
       for (let j = i; j < i + 32; j += 8) {
-        if (squares[j] && squares[j] === squares[j + 9] && squares[j] === squares[j + 18] && squares[j] === squares[j + 27] && squares[j] === squares[j +36]) {
+        if (squares[j] && 
+          squares[j] === squares[j + 9] && 
+          squares[j] === squares[j + 18] && 
+          squares[j] === squares[j + 27] && 
+          squares[j] === squares[j +36]) {
           return squares[j];
         }
       }
-      for (let j = i + 4; j < i +36; j +=8) { // This checks the other diagonal, and it is in increments of 7, because the next square that is diagonal from the previous square is 7 squares away
-        if (squares[j] && squares[j] === squares[j +7] && squares[j] === squares [j+14] && squares [j]==squares [j+21]&&squares [j]==squares [j+28]){
+      for (let j = i + 4; j < i +36; j +=8) { // This checks the reverse diagonal, and it is in increments of 7, because the next square that is diagonal from the previous square is 7 squares away
+        if (squares[j] && 
+          squares[j] === squares[j +7] && 
+          squares[j] === squares [j+14] && 
+          squares [j]==squares [j+21]&&
+          squares [j]==squares [j+28]){
           return squares [j];
         }
       }

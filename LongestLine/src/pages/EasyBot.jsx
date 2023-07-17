@@ -98,10 +98,10 @@ export default function EasyBot() {
 
   useEffect(() => {
     if (!xIsNext) {
-      // Computer's turn
+      
       const timer = setTimeout(() => {
         makeComputerMove();
-      }, 5); // Adjust the delay as needed
+      }, 5); 
 
       return () => clearTimeout(timer);
     }
@@ -142,35 +142,81 @@ export default function EasyBot() {
   if (winner) {
     status = 'Winner: ' + winner;
     playSound(soundWinner);
+  
+    setTimeout(() => {
+      setSquares(Array(64).fill(null));
+      setXIsNext(true);
+    }, 3000);
   } else {
     status = (xIsNext ? 'Player One' : 'Player Two') + "'s turn";
     if (squares.includes(null) === false) {
       playSound(soundDraw);
       status = "It's a draw!";
+  
+      setTimeout(() => {
+        setSquares(Array(64).fill(null));
+        setXIsNext(true);
+      }, 3000);
     }
   }
 
   return (
     <>
-      <h1 className="text-5xl font-bold underline text-slate-500">
-        Longest Line Game
-      </h1>
+              <div class='light x1'></div>
+        <div class='light x2'></div>
+        <div class='light x3'></div>
+        <div class='light x4'></div>
+        <div class='light x5'></div>
+        <div class='light x6'></div>
+        <div class='light x7'></div>
+        <div class='light x8'></div>
+        <div class='light x9'></div>
+      <h1 className={`text-5xl font-bold underline ${winner ? `text-yellow-500` : `text-slate-500`}`}> Longest Line Game</h1>
 
-      <div className="text-lg font-bold">{status}</div>
+    
+      <div className={`text-3xl font-bold ${winner ? 'text-yellow-500' : xIsNext ? 'text-red-500' : 'text-blue-500'}`}>
+      {status}
+      </div>
 
-      <div className="board-row">{GenerateRow(0, 8)}</div>
-      <div className="board-row">{GenerateRow(8, 8)}</div>
-      <div className="board-row">{GenerateRow(16, 8)}</div>
-      <div className="board-row">{GenerateRow(24, 8)}</div>
-      <div className="board-row">{GenerateRow(32, 8)}</div>
-      <div className="board-row">{GenerateRow(40, 8)}</div>
-      <div className="board-row">{GenerateRow(48, 8)}</div>
-      <div className="board-row">{GenerateRow(56, 8)}</div>
-      <button className="text-white-400 text-lg font-bold" onClick={HandleRestart}>
-        Restart
-      </button>
+
+
+      
+      <div className='board-row'> 
+        {GenerateRow(0, 8)}
+      </div> 
+      <div className='board-row'>
+        {GenerateRow(8, 8)}
+      </div> 
+      <div className='board-row'>
+        {GenerateRow(16, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(24, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(32, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(40, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(48, 8)}
+      </div>
+      <div className='board-row'>
+        {GenerateRow(56, 8)}
+      </div>
+      <button className="flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
+        w-40 h-12 text-2xl rounded-lg opacity-50 top-40 bottom-0 left-0 right-0 mx-auto 
+        transition duration-300 hover:border-gray-700 hover:bg-gray-200 
+        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={HandleRestart}> Restart</button>
+
       <br></br>
-      <button onClick={handlePlaying}>{isPlaying ? musicIcon : musicIconMuted}</button>
+      <button className="flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
+        w-30 h-12 text-xl rounded-lg opacity-50 top-40 bottom-0 left-0 right-0 mx-auto 
+        transition duration-300 hover:border-gray-700 hover:bg-gray-200 
+        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={handlePlaying}>
+        {isPlaying ? musicIcon : musicIconMuted}
+      </button>
     </>
   );
 }
