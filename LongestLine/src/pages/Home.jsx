@@ -7,8 +7,8 @@ const Home = () => {
 
     return (
         <>
-        <p id='head1' class='absolute top-1/4 left-1/2 -translate-x-1/2 -translate-x-1/2 text-white font-sans text-4xl font-weight: 200'>Software Assignment 2</p>
-        <p id='head2' class='absolute top-1/4 left-1/2 -translate-x-1/2 -translate-x-1/2 text-white font-sans text-4xl font-weight: 200'>Longest Line game 
+        <p id='head1' class='flex justify-center absolute top-1/4 left-1/2 -translate-x-1/2 -translate-x-1/2 text-white font-sans text-4xl font-weight: 200'>Software Assignment 2</p>
+        <p id='head2' class=' absolute top-1/4 left-1/2 -translate-x-1/2 -translate-x-1/2 text-white font-sans text-4xl font-weight: 200'>Longest Line game 
         <p> By Vincent Zeng</p>
             </p>
         
