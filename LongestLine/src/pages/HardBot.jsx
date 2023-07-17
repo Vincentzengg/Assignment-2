@@ -39,6 +39,12 @@ let musicIconMuted = (
   </svg>
 );
 
+let restartIcon = (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+</svg>
+);
+
 function playSound(audioName) {
   let audio = new Audio(audioName);
   audio.play();
@@ -478,14 +484,13 @@ if (winner) {
       <div className='board-row'>
         {GenerateRow(56, 8)}
       </div>
-      <button className="flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
-        w-40 h-12 text-2xl rounded-lg opacity-50 top-40 bottom-0 left-0 right-0 mx-auto 
+      <button className="relative flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
+        w-20 h-12 text-xl rounded-lg opacity-50 top-0 bottom-0 left-0 right-0 mx-auto -translate-x-20
         transition duration-300 hover:border-gray-700 hover:bg-gray-200 
-        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={HandleRestart}> Restart</button>
-
-      <br></br>
-      <button className="flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
-        w-30 h-12 text-xl rounded-lg opacity-50 top-40 bottom-0 left-0 right-0 mx-auto 
+        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={HandleRestart}>{restartIcon}</button>
+        
+      <button className="relative flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
+        w-20 h-12 text-xl rounded-lg opacity-50 top-0 bottom-0 left-0 right-0 mx-auto -translate-y-12 translate-x-20
         transition duration-300 hover:border-gray-700 hover:bg-gray-200 
         hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={handlePlaying}>
         {isPlaying ? musicIcon : musicIconMuted}
