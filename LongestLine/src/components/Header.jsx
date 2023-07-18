@@ -7,7 +7,7 @@ export default function Header() {
   const navigateTo = useNavigate()
   return (
     <div class="w-auto h-16 bg-gray-800 rounded-lg">
-      <div class="relative text-base font-mono top-1.5 text-xl flex justify-center">
+      <div class="relative text-base font-mono top-1.5 text-xl flex justify-center text-white">
 
 
         <button class="relative right-56 bg-gray-800 border-solid border-white"
