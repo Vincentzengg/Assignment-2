@@ -450,7 +450,7 @@ if (winner) {
         <div class='light x7'></div>
         <div class='light x8'></div>
         <div class='light x9'></div>
-      <h1 className={`text-5xl font-bold underline ${winner ? `text-yellow-500` : `text-slate-500`}`}> Longest Line Game</h1>
+      <h1 className={`text-5xl font-bold underline ${winner ? `text-yellow-500` : `text-slate-500`}`}>Longest Line Game</h1>
 
     
       <div className={`text-3xl font-bold ${winner ? 'text-yellow-500' : xIsNext ? 'text-red-500' : 'text-blue-500'}`}>
@@ -485,16 +485,13 @@ if (winner) {
         {GenerateRow(56, 8)}
       </div>
       <button className="relative flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
-        w-20 h-12 text-xl rounded-lg opacity-50 top-0 bottom-0 left-0 right-0 mx-auto -translate-x-20
+        w-20 h-12 text-xl rounded-lg opacity-50 top-0 bottom-0 left-0 right-0 mx-auto
         transition duration-300 hover:border-gray-700 hover:bg-gray-200 
         hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={HandleRestart}>{restartIcon}</button>
+
         
-      <button className="relative flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
-        w-20 h-12 text-xl rounded-lg opacity-50 top-0 bottom-0 left-0 right-0 mx-auto -translate-y-12 translate-x-20
-        transition duration-300 hover:border-gray-700 hover:bg-gray-200 
-        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={handlePlaying}>
-        {isPlaying ? musicIcon : musicIconMuted}
-      </button>
+
+      
     </>
   );
 }
