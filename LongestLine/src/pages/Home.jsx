@@ -16,7 +16,8 @@ const Home = () => {
         absolute border-2 border-white bg-transparent font-sans text-white 
         w-64 h-12 text-3xl rounded opacity-50 top-96 bottom-0 left-0 right-0 mx-auto 
         transition duration-300 hover:border-gray-700 hover:bg-gray-200 
-        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" 
+        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md
+        rounded-lg" 
         onClick={() => navigateTo('play')}> 
         Play</button>
 
@@ -24,7 +25,8 @@ const Home = () => {
         absolute border-2 border-white bg-transparent font-sans text-white 
         w-64 h-12 text-3xl rounded opacity-50 top-1/2 bottom-0 left-0 right-0 mx-auto 
         transition duration-300 hover:border-gray-700 hover:bg-gray-200 
-        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" 
+        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md
+        rounded-lg" 
         onClick={() => navigateTo('About')}> 
         How To Play</button>
         
