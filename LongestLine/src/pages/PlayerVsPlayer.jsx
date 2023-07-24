@@ -108,7 +108,7 @@ export default function PlayerVsPlayer() {
         {squareValue++} // Adds one to the value, so that the next square that is created, is 1+ from the previous square
       
       }
-    
+  
     return row
   
   
