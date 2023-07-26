@@ -108,7 +108,7 @@ export default function PlayerVsPlayer() {
         {squareValue++} // Adds one to the value, so that the next square that is created, is 1+ from the previous square
       
       }
-    
+  
     return row
   
   
@@ -207,16 +207,11 @@ if (winner) {
         {GenerateRow(56, 8)}
       </div>
       <button className="relative flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
-        w-20 h-12 text-xl rounded-lg opacity-50 top-0 bottom-0 left-0 right-0 mx-auto -translate-x-20
+        w-20 h-12 text-xl rounded-lg opacity-50 top-0 bottom-0 left-0 right-0 mx-auto
         transition duration-300 hover:border-gray-700 hover:bg-gray-200 
         hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={HandleRestart}>{restartIcon}</button>
         
-      <button className="relative flex items-center justify-center border-2 border-white bg-transparent font-sans text-white 
-        w-20 h-12 text-xl rounded-lg opacity-50 top-0 bottom-0 left-0 right-0 mx-auto -translate-y-12 translate-x-20
-        transition duration-300 hover:border-gray-700 hover:bg-gray-200 
-        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" onClick={handlePlaying}>
-        {isPlaying ? musicIcon : musicIconMuted}
-      </button>
+      
       
       
     </>

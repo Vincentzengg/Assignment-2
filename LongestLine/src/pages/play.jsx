@@ -19,7 +19,8 @@ const Play = () => {
         absolute border-2 border-white bg-transparent font-sans text-white 
         w-64 h-20 text-3xl rounded opacity-50 top-96 bottom-0 left-0 right-1/2 mx-auto 
         transition duration-300 hover:border-gray-700 hover:bg-gray-200 
-        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" 
+        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md
+        rounded-lg" 
         onClick={() => navigateTo('/HardBot')}> 
         Hard Bot</button>
 
@@ -27,7 +28,8 @@ const Play = () => {
         absolute border-2 border-white bg-transparent font-sans text-white 
         w-64 h-20 text-3xl rounded opacity-50 top-96 bottom-0 left-1/2 right-0 mx-auto 
         transition duration-300 hover:border-gray-700 hover:bg-gray-200 
-        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" 
+        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md
+        rounded-lg" 
         onClick={() => navigateTo('/EasyBot')}> 
         Easy Bot</button>
 
@@ -35,7 +37,8 @@ const Play = () => {
         absolute border-2 border-white bg-transparent font-sans text-white 
         w-64 h-20 text-3xl rounded opacity-50 top-96 bottom-0 left-0 right-0 mx-auto 
         transition duration-300 hover:border-gray-700 hover:bg-gray-200 
-        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md" 
+        hover:cursor-pointer hover:text-gray-700 hover:opacity-80 hover:shadow-md
+        rounded-lg" 
         onClick={() => navigateTo('/PlayerVsPlayer')}> 
         Player Vs Player</button>
 
